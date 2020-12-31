@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "168a7feaa58129a5fb7a22d462849ac2",
+    "content-hash": "6cc4a99ffee1a456831788e6aaba4587",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -51,6 +51,50 @@
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
             "time": "2020-07-16T03:44:28+00:00"
+        },
+        {
+            "name": "irsyadulibad/codeigniter4-datatables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/irsyadulibad/ci4-datatables.git",
+                "reference": "21912323fb50cb172a53d0a5f40fc4b13057832f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/irsyadulibad/ci4-datatables/zipball/21912323fb50cb172a53d0a5f40fc4b13057832f",
+                "reference": "21912323fb50cb172a53d0a5f40fc4b13057832f",
+                "shasum": ""
+            },
+            "require": {
+                "codeigniter4/framework": "^4",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Irsyadulibad\\DataTables\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ahmad Irsyadul Ibad",
+                    "email": "ahmadirsyadulibad7@gmail.com",
+                    "homepage": "http://irsyadulibad.my.id",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Server side DataTables library for CodeIgniter4 framework",
+            "keywords": [
+                "codeigniter",
+                "datatables",
+                "server side"
+            ],
+            "time": "2020-12-18T09:05:34+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -1930,9 +1974,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "stability-flags": {
         "myth/auth": 10,
+        "irsyadulibad/codeigniter4-datatables": 20,
         "fzaninotto/faker": 20
     },
     "prefer-stable": true,

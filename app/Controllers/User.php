@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 class User extends BaseController
 {
 
@@ -9,7 +10,6 @@ class User extends BaseController
   {
     return view('user/index');
   }
-
 
   //--------------------------------------------------------------------
 

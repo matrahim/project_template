@@ -11,6 +11,16 @@
   <!-- App favicon -->
   <link rel="shortcut icon" href="<?= base_url(); ?>/assets/images/favicon.ico">
 
+  <!-- third party css -->
+  <link href="<?= base_url(); ?>/assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+  <link href="<?= base_url(); ?>/assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+  <link href="<?= base_url(); ?>/assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+  <link href="<?= base_url(); ?>/assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+  <!-- third party css end -->
+
+  <!-- dropify -->
+  <link href="<?= base_url(); ?>/assets/libs/dropify/dropify.min.css" rel="stylesheet" type="text/css" />
+
   <!-- App css -->
   <link href="<?= base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?= base_url(); ?>/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -76,9 +86,71 @@
   <!-- Vendor js -->
   <script src="<?= base_url(); ?>/assets/js/vendor.min.js"></script>
 
+  <!-- third party js -->
+  <script src="<?= base_url(); ?>/assets/libs/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/dataTables.bootstrap4.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/dataTables.responsive.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/dataTables.buttons.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/buttons.html5.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/buttons.flash.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/buttons.print.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/dataTables.keyTable.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/datatables/dataTables.select.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/pdfmake/pdfmake.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/libs/pdfmake/vfs_fonts.js"></script>
+  <!-- third party js ends -->
+  <!-- Datatables init -->
+  <script src="<?= base_url(); ?>/assets/js/pages/datatables.init.js"></script>
+  <!-- Validation js (Parsleyjs) -->
+  <script src="<?= base_url(); ?>/assets/libs/parsleyjs/parsley.min.js"></script>
+
+  <!-- dropify js -->
+  <script src="<?= base_url(); ?>/assets/libs/dropify/dropify.min.js"></script>
+
+  <!-- form-upload init -->
+  <script src="<?= base_url(); ?>/assets/js/pages/form-fileupload.init.js"></script>
+
+  <!-- validation init -->
+  <script src="<?= base_url(); ?>/assets/js/pages/form-validation.init.js"></script>
   <!-- App js -->
   <script src="<?= base_url(); ?>/assets/js/app.min.js"></script>
 
+  <script>
+    $('#datatable_user').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: '<?= base_url('admin') ?>/json'
+      },
+      columns: [{
+          data: 'username',
+          name: 'username'
+        },
+        {
+          data: 'email',
+          name: 'email'
+        },
+        {
+          data: 'fullname',
+          name: 'fullname'
+        },
+        {
+          data: 'user_image',
+          name: 'user_image'
+        },
+        {
+          data: 'type_user',
+          name: 'type_user'
+        },
+        {
+          data: 'action',
+          name: 'action'
+        },
+      ]
+    });
+  </script>
 </body>
 
 </html>
