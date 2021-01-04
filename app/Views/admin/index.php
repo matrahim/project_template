@@ -10,6 +10,9 @@
         <p class="text-muted font-14 mb-3">
           Manage User Only For Super Admin and Admin
         </p>
+        <a href="<?= base_url("admin/add"); ?>">
+          <button class="btn btn-info waves-effect waves-light mb-3"> <i class="fa fa-user-plus mr-1"></i> <span>Add User</span> </button>
+        </a>
 
         <table id="datatable_user" class="table table-bordered dt-responsive nowrap">
           <thead>

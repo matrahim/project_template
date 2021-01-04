@@ -137,8 +137,8 @@
           name: 'fullname'
         },
         {
-          data: 'user_image',
-          name: 'user_image'
+          data: 'foto',
+          name: 'foto'
         },
         {
           data: 'type_user',

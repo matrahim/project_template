@@ -35,6 +35,8 @@ $routes->get('/', 'User::index');
 
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
+$routes->get('/admin/add', 'Admin::create', ['filter' => 'role:admin']);
+$routes->get('/admin/save', 'Admin::save', ['filter' => 'role:admin']);
 // $routes->get('/admin/edit', 'Admin::edit', ['filter' => 'role:admin']);
 // $routes->get('/admin/edit/(:num)', 'Admin::edit/$1');
 $routes->get('/admin/edit/(:num)', 'Admin::edit/$1', ['filter' => 'role:admin']);
