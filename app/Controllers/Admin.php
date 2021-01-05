@@ -29,6 +29,8 @@ class Admin extends BaseController
   public function edit($id = '')
   {
     $data['id'] = $id;
+    $data['validation'] = $this->validation;
+    $data['user'] = $this->admin->find($id);
     return view('admin/edit.php', $data);
   }
 
@@ -99,7 +101,7 @@ class Admin extends BaseController
       $namaFile = "default.jpg";
     } else {
       // $file = $this->request->getFile('profil_img');
-      $ext = $file->getExtension();
+      // $ext = $file->getExtension();
       $namaFile = $file->getRandomName();
       $file->move('img/profil/', $namaFile);
     }

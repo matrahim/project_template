@@ -9,6 +9,7 @@
         <h4 class="header-title mt-0 mb-3">Form Add Data</h4>
 
         <form action="/admin/save" method="POST" enctype="multipart/form-data">
+          <?= csrf_field() ?>
           <div class="row">
 
             <div class=" form-group col-xl-4">
