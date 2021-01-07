@@ -8,8 +8,9 @@
       <div class="card-box">
         <h4 class="header-title mt-0 mb-3">Form Add Data</h4>
 
-        <form action="/admin/save" method="POST" enctype="multipart/form-data">
+        <form action="/admin/update" method="POST" enctype="multipart/form-data">
           <?= csrf_field() ?>
+          <input type="hidden" value="<?= $user->id; ?>" name="id">
           <div class="row">
 
             <div class=" form-group col-xl-4">

@@ -10,6 +10,11 @@
         <p class="text-muted font-14 mb-3">
           Manage User Only For Super Admin and Admin
         </p>
+        <?php if (session()->getFlashdata('pesan')) : ?>
+          <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('pesan'); ?>
+          </div>
+        <?php endif ?>
         <a href="<?= base_url("admin/add"); ?>">
           <button class="btn btn-info waves-effect waves-light mb-3"> <i class="fa fa-user-plus mr-1"></i> <span>Add User</span> </button>
         </a>
