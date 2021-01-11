@@ -150,6 +150,23 @@
         },
       ]
     });
+
+
+    function previewImg() {
+
+      const gambar = document.querySelector('#profil_img');
+      const label = document.querySelector('.custom-file-label');
+      const imgPrev = document.querySelector('.img-preview');
+
+      label.textContent = gambar.files[0].name;
+
+      const fileLabel = new FileReader();
+      fileLabel.readAsDataURL(gambar.files[0]);
+
+      fileLabel.onload = function(e) {
+        imgPrev.src = e.target.result;
+      }
+    }
   </script>
 </body>
 

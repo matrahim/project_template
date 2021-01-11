@@ -259,6 +259,19 @@ class Admin extends BaseController
     return redirect()->to('/admin');
   }
 
+  public function delete($id)
+  {
+    // $id = (int)$id;
+    // $data = $this->admin->find();
+    // dd($data);
+    // if ($data->user_image != 'default.jpg') {
+    //   unlink('img/profil/' . $data->user_image);
+    // }
+    $this->admin->delete($id);
+    session()->setFlashdata('pesan', 'Data Berhasil di Hapus');
+
+    return redirect()->to('/admin');
+  }
 
   public function json()
   {
@@ -267,16 +280,20 @@ class Admin extends BaseController
       ->join('auth_groups_users', 'users.id = auth_groups_users.user_id', 'LEFT')
       ->join('auth_groups', 'auth_groups_users.group_id = auth_groups.id', 'LEFT')
       ->addColumn('action', function ($data) {
-        return '
-        <a class="btn btn-icon waves-effect waves-light btn-danger"> <i class="fas fa-trash"></i> </a>
-        <a class="btn btn-icon waves-effect waves-light btn-info"> <i class="fas fa-list"></i> </a>
-        <a href="' . base_url('admin/edit/' . $data->id) . '" class="btn btn-icon waves-effect waves-light btn-warning"> <i class="fas fa-pen"></i> </a>';
+        return "
+        <form action='/admin/" . $data->id . "' method='post' class='d-inline'>
+                           " . csrf_field() . "
+                          <input type='hidden' name='_method' value='delete' />
+                          <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button>
+        <a class='btn btn-icon waves-effect waves-light btn-info'> <i class='fas fa-list'></i> </a>
+        <a href='" . base_url('admin/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
       })
       ->addColumn('foto', function ($data) {
         return '
         <img width="100" src="' . base_url('img/profil') . '/' . $data->user_image . '" />';
       })
       ->rawColumns(['action', 'foto'])
+      ->where(['deleted_at' => null])
       // ->order(['id'])
       // ->rawColumns(['foto'])
       // ->hideColumns(['password_hash'])

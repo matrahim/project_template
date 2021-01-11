@@ -6,9 +6,9 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card-box">
-        <h4 class="header-title mt-0 mb-3">Form Add Data</h4>
+        <h4 class="header-title mt-0 mb-3">Form Edit Data</h4>
 
-        <form action="/admin/update" method="POST" enctype="multipart/form-data">
+        <form action="/account/update" method="POST" enctype="multipart/form-data">
           <?= csrf_field() ?>
           <input type="hidden" value="<?= $user->id; ?>" name="id">
           <div class="row">
@@ -58,11 +58,20 @@
               <!-- <input type="password" placeholder="Password" class="form-control"> -->
             </div>
             <div class="form-group col-xl-4">
-              <h4 class="header-title mt-0 mb-3">Profil Pic</h4>
+              <label for="profil_img">Profil Pic</label>
+              <!-- <h4 class="header-title mt-0 mb-3">Profil Pic</h4> -->
+              <div class="form-group row">
+                <div class="col-xl-4">
+                  <img src="<?= base_url() ?>/img/profil/<?= $user->user_image; ?> " class="img-thumbnail img-preview">
+                </div>
+                <div class="col-xl-8">
+                  <input onchange="previewImg()" type="file" class="custom-file-input <?= ($validation->hasError('profil_img')) ? 'is-invalid' : ''; ?>" id="profil_img" name="profil_img">
+                  <label class="custom-file-label" for="profil_img">Pilih Gambar</label>
 
-              <input type="file" name="profil_img" class="dropify <?= ($validation->hasError('profil_img')) ? 'is-invalid' : ""; ?>" data-height="100" data-max-file-size="500k" data-allowed-file-extensions="jpg png jpeg" />
-              <div class="invalid-feedback">
-                <?= $validation->getError('profil_img'); ?>
+                  <div class="invalid-feedback">
+                    <?= $validation->getError('profil_img'); ?>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

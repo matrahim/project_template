@@ -70,9 +70,9 @@
             <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
               Submit
             </button>
-            <button type="reset" class="btn btn-secondary waves-effect waves-light">
+            <a href="/" type="reset" class="btn btn-secondary waves-effect waves-light">
               Cancel
-            </button>
+            </a>
           </div>
 
         </form>

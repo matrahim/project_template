@@ -4,13 +4,13 @@
 
     <!-- User box -->
     <div class="user-box text-center">
-      <img src="<?= base_url(); ?>/assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-lg">
+      <img src="<?= base_url(); ?>/img/profil/<?= user()->user_image; ?>" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-lg">
       <div class="dropdown">
         <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"><?= user()->username; ?></a>
         <div class="dropdown-menu user-pro-dropdown">
 
           <!-- item-->
-          <a href="javascript:void(0);" class="dropdown-item notify-item">
+          <a href="<?= base_url(); ?>/edit/<?= user()->id; ?>" class="dropdown-item notify-item">
             <i class="fe-user mr-1"></i>
             <span>My Account</span>
           </a>
@@ -35,8 +35,8 @@
 
         </div>
       </div>
-      <p class="text-muted">Admin Head</p>
-      <ul class="list-inline">
+      <p class="text-muted"><?= user()->fullname ?></p>
+      <!-- <ul class="list-inline">
         <li class="list-inline-item">
           <a href="#" class="text-muted">
             <i class="mdi mdi-settings"></i>
@@ -48,7 +48,7 @@
             <i class="mdi mdi-power"></i>
           </a>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <!--- Sidemenu -->
