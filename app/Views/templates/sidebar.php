@@ -64,10 +64,17 @@
             <span> Dashboard </span>
           </a>
         </li>
+        <li>
+          <a href="<?= base_url('penduduk'); ?>">
+            <i class="mdi mdi-account-multiple"></i>
+            <span> Penduduk</span>
+          </a>
+        </li>
+
         <?php if (in_groups('admin')) : ?>
           <li>
             <a href="<?= base_url('admin'); ?>">
-              <i class="mdi mdi-view-dashboard"></i>
+              <i class="mdi mdi-account-multiple"></i>
               <span> User List </span>
             </a>
           </li>
