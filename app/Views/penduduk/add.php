@@ -152,35 +152,17 @@
                       <th>Nama</th>
                       <th>SHDK</th>
                       <th>Status</th>
-                      <th>Alamat</th>
+
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="isi_kk">
+
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td rowspan="3" class="text-left">
-                        Dusun : Jaya Mandiri <br>
-                        RT : 01 <br>
-                        RW : 01 <br>
-                        Desa : Tangkau <br>
-                        Kabupaten : Mamuju Tengah<br>
-                        Provinsi : Sulawesi Barat
-                      </td>
+                      <th colspan="4" class="text-muted text-center">Data Kosong</th>
+
                     </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
+
+
                   </tbody>
                 </table>
               </div>

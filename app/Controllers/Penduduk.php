@@ -347,6 +347,20 @@ class Penduduk extends BaseController
       ->make(true);
   }
 
+  public function getKK()
+  {
+    $id = $this->request->getVar('id');
+    $dataKK = $this->db->table('penduduk')
+      ->select('penduduk.nama,penduduk.id_shdk,shdk.nama_shdk,penduduk.id_status,status.nama_status,kk.id_dusun,kk.rt,kk.rw,dusun.nama_dusun')
+      ->join('kk', 'kk.id_kk = penduduk.id_kk', 'LEFT')
+      ->join('shdk', 'shdk.id_shdk = penduduk.id_shdk', 'LEFT')
+      ->join('status', 'status.id_status = penduduk.id_status', 'LEFT')
+      ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
+      ->where("penduduk.id_kk='" . $id . "'")
+      ->get()->getResultArray();
+    // return ;
+    echo json_encode($dataKK);
+  }
   //--------------------------------------------------------------------
 
 }
