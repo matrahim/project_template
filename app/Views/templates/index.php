@@ -57,7 +57,7 @@
       });
 
       request.done(function(data) {
-        console.log(data);
+
         let isikk = '';
         if (data.length < 1) {
           isikk = `<tr>

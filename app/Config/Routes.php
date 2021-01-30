@@ -37,14 +37,15 @@ $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/add', 'Admin::create', ['filter' => 'role:admin']);
 $routes->get('/admin/save', 'Admin::save', ['filter' => 'role:admin']);
-
+$routes->get('/admin/update', 'Admin::update', ['filter' => 'role:admin']);
 $routes->get('/admin/edit/(:num)', 'Admin::edit/$1', ['filter' => 'role:admin']);
 $routes->delete('/admin/(:num)', 'Admin::delete/$1', ['filter' => 'role:admin']);
 
-$routes->get('/edit/(:num)', 'Account::edit/$1', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->get('/edit/(:num)', 'Account::edit/$1', ['filter' => 'role:user', 'filter' => 'role:admin,$1']);
 
 $routes->get('/penduduk/add', 'Penduduk::create', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->get('/penduduk/save', 'Penduduk::save', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->get('/penduduk/edit/(:num)', 'Penduduk::edit/$1', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->post('/penduduk/ambil_data_kk', 'Penduduk::getKK', ['filter' => 'role:user', 'filter' => 'role:admin']);
 /**
  * --------------------------------------------------------------------
