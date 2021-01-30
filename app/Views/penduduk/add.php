@@ -117,7 +117,7 @@
           <div class="row">
             <div class=" form-group col-xl-4">
               <label for="nkk">No Kartu Keluarga</label>
-              <select name="kk" id="nkk" class="form-control select2 <?= ($validation->hasError('kk')) ? 'is-invalid' : ""; ?>">
+              <select onchange="angotakk()" name="kk" id="nkk" class="form-control select2 <?= ($validation->hasError('kk')) ? 'is-invalid' : ""; ?>">
                 <option value="" <?= old('kk') == "" ? "selected" : ""; ?>>Pilih No KK - Kepala keluarga</option>
                 <?php foreach ($kk as $row) : ?>
                   <option <?= old('kk') == $row->id_kk ? "selected" : ""; ?> value="<?= $row->id_kk ?>"><?= $row->no_kk . ' - ' . $row->nama ?></option>

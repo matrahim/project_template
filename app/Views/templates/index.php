@@ -39,6 +39,57 @@
   <link href="<?= base_url(); ?>/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
   <link href="<?= base_url(); ?>/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
+  <script>
+    function angotakk() {
+
+      var request = $.ajax({
+        url: "<?= base_url('penduduk/ambil_data_kk') ?>",
+        type: "POST",
+        data: {
+          id: $('#nkk').val()
+        },
+        dataType: "json",
+        beforeSend: () => {
+
+          $('#isi_kk').html('Memuat .....')
+
+        }
+      });
+
+      request.done(function(data) {
+        console.log(data);
+        let isikk = '';
+        if (data.length < 1) {
+          isikk = `<tr>
+                <th colspan="4" class="text-muted text-center">Data Kosong</th>
+            </tr>`;
+        } else {
+          isikk += `<tr>
+                <th colspan="4" class="text-center">Alamat : 
+                 Dusun ` + data[0].nama_dusun +
+            ` Rt-` + data[0].rt +
+            ` Rw-` + data[0].rw +
+            `
+                </th>
+            </tr>`;
+          for (let i = 0; i < data.length; i++) {
+            // const element = array[index];
+            isikk += `
+      <tr>
+        <th scope="row">` + (i + 1) + `</th>
+        <td>` + data[i].nama + `</td>
+        <td>` + data[i].nama_shdk + `</td>
+        <td>` + data[i].nama_status + `</td>
+      </tr>
+        `;
+
+          }
+        }
+        $('#isi_kk').html(isikk)
+      });
+
+    }
+  </script>
 </head>
 
 <body>
@@ -146,12 +197,12 @@
   <!-- App js -->
   <script src="<?= base_url(); ?>/assets/js/app.min.js"></script>
 
-  <!-- costom js -->
-  <script src="<?= base_url(); ?>/assets/js/myApp.js"></script>
+
 
   <script>
     $(document).ready(function() {
 
+      $(window).on("load", angotakk());
       $('#nkk').select2();
 
       $('#datatable_user').DataTable({
@@ -237,55 +288,7 @@
         }
       }
 
-      $('#nkk').bind('load change', function() {
 
-        var request = $.ajax({
-          url: "<?= base_url('penduduk/ambil_data_kk') ?>",
-          type: "POST",
-          data: {
-            id: $('#nkk').val()
-          },
-          dataType: "json",
-          beforeSend: () => {
-
-            $('#isi_kk').html('Memuat .....')
-
-          }
-        });
-
-        request.done(function(data) {
-          console.log(data);
-          let isikk = '';
-          if (data.length < 1) {
-            isikk = `<tr>
-                        <th colspan="4" class="text-muted text-center">Data Kosong</th>
-                    </tr>`;
-          } else {
-            isikk += `<tr>
-                        <th colspan="4" class="text-center">Alamat : 
-                         Dusun ` + data[0].nama_dusun +
-              ` Rt-` + data[0].rt +
-              ` Rw-` + data[0].rw +
-              `
-                        </th>
-                    </tr>`;
-            for (let i = 0; i < data.length; i++) {
-              // const element = array[index];
-              isikk += `
-              <tr>
-                <th scope="row">` + (i + 1) + `</th>
-                <td>` + data[i].nama + `</td>
-                <td>` + data[i].nama_shdk + `</td>
-                <td>` + data[i].nama_status + `</td>
-              </tr>
-                `;
-
-            }
-          }
-          $('#isi_kk').html(isikk)
-        });
-
-      })
 
     });
   </script>
