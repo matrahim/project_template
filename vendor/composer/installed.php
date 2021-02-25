@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'afde45a08182b35b56dc2a1c6f83e1567c159dd0',
+    'reference' => 'f383cbe3e8720624d10afbd26c37d57f98dbd392',
     'name' => 'codeigniter4/appstarter',
   ),
   'versions' => 
@@ -18,16 +18,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'afde45a08182b35b56dc2a1c6f83e1567c159dd0',
+      'reference' => 'f383cbe3e8720624d10afbd26c37d57f98dbd392',
     ),
     'codeigniter4/framework' => 
     array (
-      'pretty_version' => 'v4.0.4',
-      'version' => '4.0.4.0',
+      'pretty_version' => 'v4.1.1',
+      'version' => '4.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1edcf84f77ff794640fddbfc59a10a024cd15b50',
+      'reference' => 'ddc18eb2f42a17a51347c4c25cce9d2aaebcb718',
     ),
     'doctrine/instantiator' => 
     array (
@@ -126,12 +126,12 @@
     ),
     'phar-io/version' => 
     array (
-      'pretty_version' => '3.0.4',
-      'version' => '3.0.4.0',
+      'pretty_version' => '3.1.0',
+      'version' => '3.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e4782611070e50613683d2b9a57730e9a3ba5451',
+      'reference' => 'bae7c545bef187884426f042434e561ab1ddb182',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -342,8 +342,8 @@
     ),
     'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),

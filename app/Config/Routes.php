@@ -46,6 +46,7 @@ $routes->get('/edit/(:num)', 'Account::edit/$1', ['filter' => 'role:user', 'filt
 $routes->get('/penduduk/add', 'Penduduk::create', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->get('/penduduk/save', 'Penduduk::save', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->get('/penduduk/edit/(:num)', 'Penduduk::edit/$1', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->delete('/penduduk/(:num)', 'Penduduk::delete/$1', ['filter' => 'role:admin']);
 $routes->post('/penduduk/ambil_data_kk', 'Penduduk::getKK', ['filter' => 'role:user', 'filter' => 'role:admin']);
 /**
  * --------------------------------------------------------------------

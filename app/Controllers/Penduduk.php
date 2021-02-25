@@ -156,10 +156,10 @@ class Penduduk extends BaseController
       return redirect()->to('/penduduk/add')->withInput();
     };
 
-    // dd($this->request->getVar('tgl_lahir'));
+    // dd($this->request->getVar('kk'));
 
     $this->penduduk->save([
-      'id_kk' => $this->request->getVar('kk'),
+      'id_kk' => $this->request->getVar('kk') == "" ? NULL : $this->request->getVar('kk'),
       'nik' => $this->request->getVar('nik'),
       'nama' => $this->request->getVar('nama'),
       'tempat_lahir' => $this->request->getVar('tempat_lahir'),
@@ -263,10 +263,10 @@ class Penduduk extends BaseController
     // if ($data->user_image != 'default.jpg') {
     //   unlink('img/profil/' . $data->user_image);
     // }
-    $this->admin->delete($id);
+    $this->penduduk->delete($id);
     session()->setFlashdata('pesan', 'Data Berhasil di Hapus');
 
-    return redirect()->to('/admin');
+    return redirect()->to('/penduduk');
   }
 
   public function json()
@@ -282,7 +282,7 @@ class Penduduk extends BaseController
         <form action='/penduduk/" . $data->id . "' method='post' class='d-inline'>
                            " . csrf_field() . "
                           <input type='hidden' name='_method' value='delete' />
-                          <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button>
+                          <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button></form>
         <a class='btn btn-icon waves-effect waves-light btn-info'> <i class='fas fa-list'></i> </a>
         <a href='" . base_url('penduduk/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
       })

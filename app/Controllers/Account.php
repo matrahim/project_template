@@ -112,7 +112,7 @@ class Account extends BaseController
       $namaFile = $file->getRandomName();
       $file->move('img/profil/', $namaFile);
       // $file->move('img/ktp-adart', $namaFile);
-      if ($old_data->user_image != 'default.jpg') {
+      if ($old_data->user_image != 'default.jpg' && file_exists('img/profil/' . $old_data->user_image)) {
         unlink('img/profil/' . $old_data->user_image);
       }
     }

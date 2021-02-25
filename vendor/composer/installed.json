@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "codeigniter4/framework",
-            "version": "v4.0.4",
-            "version_normalized": "4.0.4.0",
+            "version": "v4.1.1",
+            "version_normalized": "4.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/framework.git",
-                "reference": "1edcf84f77ff794640fddbfc59a10a024cd15b50"
+                "reference": "ddc18eb2f42a17a51347c4c25cce9d2aaebcb718"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/framework/zipball/1edcf84f77ff794640fddbfc59a10a024cd15b50",
-                "reference": "1edcf84f77ff794640fddbfc59a10a024cd15b50",
+                "url": "https://api.github.com/repos/codeigniter4/framework/zipball/ddc18eb2f42a17a51347c4c25cce9d2aaebcb718",
+                "reference": "ddc18eb2f42a17a51347c4c25cce9d2aaebcb718",
                 "shasum": ""
             },
             "require": {
@@ -22,24 +22,30 @@
                 "ext-mbstring": "*",
                 "kint-php/kint": "^3.3",
                 "laminas/laminas-escaper": "^2.6",
-                "php": ">=7.2",
+                "php": "^7.3||^8.0",
                 "psr/log": "^1.1"
             },
             "require-dev": {
                 "codeigniter4/codeigniter4-standard": "^1.0",
-                "fzaninotto/faker": "^1.9@dev",
-                "mikey179/vfsstream": "1.6.*",
-                "phpunit/phpunit": "^8.5",
+                "fakerphp/faker": "^1.9",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^9.1",
                 "predis/predis": "^1.1",
                 "squizlabs/php_codesniffer": "^3.3"
             },
-            "time": "2020-07-16T03:44:28+00:00",
+            "suggest": {
+                "ext-fileinfo": "Improves mime type detection for files"
+            },
+            "time": "2021-02-01T18:41:38+00:00",
             "type": "project",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "CodeIgniter\\": "system/"
-                }
+                },
+                "exclude-from-classmap": [
+                    "**/Database/Migrations/**"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -47,7 +53,12 @@
             ],
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
-            "install-path": "../../../../Project/sipdukv2/vendor/codeigniter4/framework"
+            "support": {
+                "forum": "http://forum.codeigniter.com/",
+                "slack": "https://codeigniterchat.slack.com",
+                "source": "https://github.com/codeigniter4/CodeIgniter4"
+            },
+            "install-path": "../codeigniter4/framework"
         },
         {
             "name": "doctrine/instantiator",
@@ -101,7 +112,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/doctrine/instantiator"
+            "install-path": "../doctrine/instantiator"
         },
         {
             "name": "fzaninotto/faker",
@@ -155,7 +166,7 @@
                 "fixtures"
             ],
             "abandoned": true,
-            "install-path": "../../../../Project/sipdukv2/vendor/fzaninotto/faker"
+            "install-path": "../fzaninotto/faker"
         },
         {
             "name": "irsyadulibad/codeigniter4-datatables",
@@ -207,7 +218,7 @@
                 "issues": "https://github.com/irsyadulibad/ci4-datatables/issues",
                 "source": "https://github.com/irsyadulibad/ci4-datatables/tree/master"
             },
-            "install-path": "../../../../Project/sipdukv2/vendor/irsyadulibad/codeigniter4-datatables"
+            "install-path": "../irsyadulibad/codeigniter4-datatables"
         },
         {
             "name": "kint-php/kint",
@@ -280,7 +291,7 @@
                 "kint",
                 "php"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/kint-php/kint"
+            "install-path": "../kint-php/kint"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -332,7 +343,7 @@
                 "escaper",
                 "laminas"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/laminas/laminas-escaper"
+            "install-path": "../laminas/laminas-escaper"
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
@@ -383,7 +394,7 @@
                 "laminas",
                 "zf"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/laminas/laminas-zendframework-bridge"
+            "install-path": "../laminas/laminas-zendframework-bridge"
         },
         {
             "name": "mikey179/vfsstream",
@@ -432,7 +443,7 @@
             ],
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
-            "install-path": "../../../../Project/sipdukv2/vendor/mikey179/vfsstream"
+            "install-path": "../mikey179/vfsstream"
         },
         {
             "name": "myclabs/deep-copy",
@@ -483,7 +494,7 @@
                 "object",
                 "object graph"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/myclabs/deep-copy"
+            "install-path": "../myclabs/deep-copy"
         },
         {
             "name": "myth/auth",
@@ -536,7 +547,7 @@
                 "authorization",
                 "codeigniter"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/myth/auth"
+            "install-path": "../myth/auth"
         },
         {
             "name": "phar-io/manifest",
@@ -595,27 +606,27 @@
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
-            "install-path": "../../../../Project/sipdukv2/vendor/phar-io/manifest"
+            "install-path": "../phar-io/manifest"
         },
         {
             "name": "phar-io/version",
-            "version": "3.0.4",
-            "version_normalized": "3.0.4.0",
+            "version": "3.1.0",
+            "version_normalized": "3.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "e4782611070e50613683d2b9a57730e9a3ba5451"
+                "reference": "bae7c545bef187884426f042434e561ab1ddb182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/e4782611070e50613683d2b9a57730e9a3ba5451",
-                "reference": "e4782611070e50613683d2b9a57730e9a3ba5451",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/bae7c545bef187884426f042434e561ab1ddb182",
+                "reference": "bae7c545bef187884426f042434e561ab1ddb182",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
-            "time": "2020-12-13T23:18:30+00:00",
+            "time": "2021-02-23T14:00:09+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -645,7 +656,11 @@
                 }
             ],
             "description": "Library for handling version information and constraints",
-            "install-path": "../../../../Project/sipdukv2/vendor/phar-io/version"
+            "support": {
+                "issues": "https://github.com/phar-io/version/issues",
+                "source": "https://github.com/phar-io/version/tree/3.1.0"
+            },
+            "install-path": "../phar-io/version"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -697,7 +712,7 @@
                 "reflection",
                 "static analysis"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpdocumentor/reflection-common"
+            "install-path": "../phpdocumentor/reflection-common"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -752,7 +767,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "install-path": "../../../../Project/sipdukv2/vendor/phpdocumentor/reflection-docblock"
+            "install-path": "../phpdocumentor/reflection-docblock"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -800,7 +815,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "install-path": "../../../../Project/sipdukv2/vendor/phpdocumentor/type-resolver"
+            "install-path": "../phpdocumentor/type-resolver"
         },
         {
             "name": "phpspec/prophecy",
@@ -866,7 +881,7 @@
                 "spy",
                 "stub"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpspec/prophecy"
+            "install-path": "../phpspec/prophecy"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -932,7 +947,7 @@
                 "testing",
                 "xunit"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpunit/php-code-coverage"
+            "install-path": "../phpunit/php-code-coverage"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -985,7 +1000,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpunit/php-file-iterator"
+            "install-path": "../phpunit/php-file-iterator"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1029,7 +1044,7 @@
             "keywords": [
                 "template"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpunit/php-text-template"
+            "install-path": "../phpunit/php-text-template"
         },
         {
             "name": "phpunit/php-timer",
@@ -1081,7 +1096,7 @@
             "keywords": [
                 "timer"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpunit/php-timer"
+            "install-path": "../phpunit/php-timer"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1134,7 +1149,7 @@
                 "tokenizer"
             ],
             "abandoned": true,
-            "install-path": "../../../../Project/sipdukv2/vendor/phpunit/php-token-stream"
+            "install-path": "../phpunit/php-token-stream"
         },
         {
             "name": "phpunit/phpunit",
@@ -1234,7 +1249,7 @@
                     "type": "github"
                 }
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/phpunit/phpunit"
+            "install-path": "../phpunit/phpunit"
         },
         {
             "name": "psr/log",
@@ -1284,7 +1299,7 @@
                 "psr",
                 "psr-3"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/psr/log"
+            "install-path": "../psr/log"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1332,7 +1347,7 @@
             ],
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/code-unit-reverse-lookup"
+            "install-path": "../sebastian/code-unit-reverse-lookup"
         },
         {
             "name": "sebastian/comparator",
@@ -1399,7 +1414,7 @@
                 "compare",
                 "equality"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/comparator"
+            "install-path": "../sebastian/comparator"
         },
         {
             "name": "sebastian/diff",
@@ -1458,7 +1473,7 @@
                 "unidiff",
                 "unified diff"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/diff"
+            "install-path": "../sebastian/diff"
         },
         {
             "name": "sebastian/environment",
@@ -1514,7 +1529,7 @@
                 "environment",
                 "hhvm"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/environment"
+            "install-path": "../sebastian/environment"
         },
         {
             "name": "sebastian/exporter",
@@ -1584,7 +1599,7 @@
                 "export",
                 "exporter"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/exporter"
+            "install-path": "../sebastian/exporter"
         },
         {
             "name": "sebastian/global-state",
@@ -1641,7 +1656,7 @@
             "keywords": [
                 "global state"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/global-state"
+            "install-path": "../sebastian/global-state"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -1691,7 +1706,7 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/object-enumerator"
+            "install-path": "../sebastian/object-enumerator"
         },
         {
             "name": "sebastian/object-reflector",
@@ -1739,7 +1754,7 @@
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/object-reflector"
+            "install-path": "../sebastian/object-reflector"
         },
         {
             "name": "sebastian/recursion-context",
@@ -1795,7 +1810,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/recursion-context"
+            "install-path": "../sebastian/recursion-context"
         },
         {
             "name": "sebastian/resource-operations",
@@ -1840,7 +1855,7 @@
             ],
             "description": "Provides a list of PHP built-in functions that operate on resources",
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/resource-operations"
+            "install-path": "../sebastian/resource-operations"
         },
         {
             "name": "sebastian/type",
@@ -1889,7 +1904,7 @@
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
             "homepage": "https://github.com/sebastianbergmann/type",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/type"
+            "install-path": "../sebastian/type"
         },
         {
             "name": "sebastian/version",
@@ -1935,12 +1950,12 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "install-path": "../../../../Project/sipdukv2/vendor/sebastian/version"
+            "install-path": "../sebastian/version"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -2000,7 +2015,24 @@
                 "polyfill",
                 "portable"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/symfony/polyfill-ctype"
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "../symfony/polyfill-ctype"
         },
         {
             "name": "theseer/tokenizer",
@@ -2043,7 +2075,7 @@
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
-            "install-path": "../../../../Project/sipdukv2/vendor/theseer/tokenizer"
+            "install-path": "../theseer/tokenizer"
         },
         {
             "name": "webmozart/assert",
@@ -2095,7 +2127,7 @@
                 "check",
                 "validate"
             ],
-            "install-path": "../../../../Project/sipdukv2/vendor/webmozart/assert"
+            "install-path": "../webmozart/assert"
         }
     ],
     "dev": true,
