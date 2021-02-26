@@ -70,6 +70,12 @@
             <span> Penduduk</span>
           </a>
         </li>
+        <li>
+          <a href="<?= base_url('kk'); ?>">
+            <i class="mdi mdi-account-multiple"></i>
+            <span> Kartu Keluarga</span>
+          </a>
+        </li>
 
         <?php if (in_groups('admin')) : ?>
           <li>

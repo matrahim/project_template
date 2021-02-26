@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Irsyadulibad\DataTables\DataTables;
 // use app\CodeIgniter\Model;
 use App\Models\PendudukModel;
-use App\Models\KkModel;
+use App\Models\KeluargaModel;
 use App\Models\AgamaModel;
 use App\Models\ShdkModel;
 use App\Models\StatusModel;
@@ -23,7 +23,7 @@ class Penduduk extends BaseController
   {
     $this->db      = \Config\Database::connect();
     $this->penduduk = new PendudukModel();
-    $this->kk = new KkModel();
+    $this->kk = new KeluargaModel();
     $this->agama = new AgamaModel();
     $this->shdk = new ShdkModel();
     $this->status = new StatusModel();
@@ -165,7 +165,7 @@ class Penduduk extends BaseController
       'tempat_lahir' => $this->request->getVar('tempat_lahir'),
       'tgl_lahir' => $this->request->getVar('tgl_lahir'),
       'jk' => $this->request->getVar('jk'),
-      'id_agama' => $this->request->getVar('agama'),
+      'id_agama' => $this->request->getVar('agama') == "" ? NULL : $this->request->getVar('agama'),
       'pekerjaan' => $this->request->getVar('pekerjaan'),
       'id_shdk' => $this->request->getVar('shdk'),
       'id_status' => $this->request->getVar('status'),

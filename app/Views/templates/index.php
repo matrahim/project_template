@@ -286,6 +286,31 @@
           },
         ]
       });
+      $('#datatable_kk').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+          url: '<?= base_url('Keluarga') ?>/json'
+        },
+
+        columns: [{
+            data: 'nama',
+            name: 'nama'
+          },
+          {
+            data: 'no_kk',
+            name: 'no_kk'
+          },
+          {
+            data: 'nama_dusun',
+            name: 'nama_dusun'
+          },
+          {
+            data: 'action',
+            name: 'action'
+          },
+        ]
+      });
 
 
 

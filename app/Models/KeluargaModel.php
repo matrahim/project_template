@@ -6,7 +6,7 @@ namespace App\Models;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\Model;
 
-class KkModel extends Model
+class KeluargaModel extends Model
 {
 
   protected $table = "kk";

@@ -48,6 +48,12 @@ $routes->get('/penduduk/save', 'Penduduk::save', ['filter' => 'role:user', 'filt
 $routes->get('/penduduk/edit/(:num)', 'Penduduk::edit/$1', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->delete('/penduduk/(:num)', 'Penduduk::delete/$1', ['filter' => 'role:admin']);
 $routes->post('/penduduk/ambil_data_kk', 'Penduduk::getKK', ['filter' => 'role:user', 'filter' => 'role:admin']);
+
+
+$routes->get('/kk', 'Keluarga::index', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->get('/kk/add', 'Keluarga::create', ['filter' => 'role:user', 'filter' => 'role:admin']);
+// $routes->get('/kk/save', 'Keluarga::save', ['filter' => 'role:user', 'filter' => 'role:admin']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
