@@ -16,7 +16,7 @@
           </div>
         <?php endif ?>
         <a href="<?= base_url("penduduk/add"); ?>">
-          <button class="btn btn-info waves-effect waves-light mb-3"> <i class="fa fa-user-plus mr-1"></i> <span>Add User</span> </button>
+          <button class="btn btn-info waves-effect waves-light mb-3"> <i class="fa fa-user-plus mr-1"></i> <span>Tambah Data Penduduk</span> </button>
         </a>
 
         <table id="datatable_penduduk" class="table table-bordered dt-responsive nowrap">

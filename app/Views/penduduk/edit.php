@@ -181,7 +181,7 @@
                                                 }
                                             }
 
-                                            ?> value="<?= $row->id_kk ?>"><?= $row->no_kk . ' - ' . $row->nama ?></option>
+                                            ?> data-id="<?= $row->id_kk ?>" value="<?= $row->id_kk ?>"><?= $row->no_kk . ' - ' . $row->nama ?></option>
                                 <?php endforeach; ?>
                             </select>
 

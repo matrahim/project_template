@@ -120,7 +120,7 @@
               <select onchange="angotakk()" name="kk" id="nkk" class="form-control select2 <?= ($validation->hasError('kk')) ? 'is-invalid' : ""; ?>">
                 <option value="" <?= old('kk') == "" ? "selected" : ""; ?>>Pilih No KK - Kepala keluarga</option>
                 <?php foreach ($kk as $row) : ?>
-                  <option <?= old('kk') == $row->id_kk ? "selected" : ""; ?> value="<?= $row->id_kk ?>"><?= $row->no_kk . ' - ' . $row->nama ?></option>
+                  <option data-id="<?= $row->id_kk ?>" <?= old('kk') == $row->id_kk ? "selected" : ""; ?> value="<?= $row->id_kk ?>"><?= $row->no_kk . ' - ' . $row->nama ?></option>
                 <?php endforeach; ?>
               </select>
 

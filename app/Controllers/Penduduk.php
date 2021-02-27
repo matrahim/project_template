@@ -45,7 +45,7 @@ class Penduduk extends BaseController
     $data['kk'] = $this->db->table('kk')
       ->select('kk.*,penduduk.id_penduduk,penduduk.nama,penduduk.id_shdk')
       ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
-      ->where("penduduk.id_shdk='1'")
+      // ->where("penduduk.id_shdk='1'")
       ->get()->getResultObject();
 
     return view('penduduk/add.php', $data);
@@ -307,6 +307,7 @@ class Penduduk extends BaseController
       ->join('status', 'status.id_status = penduduk.id_status', 'LEFT')
       ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
       ->where("penduduk.id_kk='" . $id . "'")
+      ->orderBy('penduduk.id_shdk', 'ASC')
       ->get()->getResultArray();
     // return ;
     echo json_encode($dataKK);

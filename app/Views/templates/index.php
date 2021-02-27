@@ -41,12 +41,12 @@
 
   <script>
     function angotakk() {
-
+      // console.log($("#nkk").select2().find(":selected").data("id"))
       var request = $.ajax({
         url: "<?= base_url('penduduk/ambil_data_kk') ?>",
         type: "POST",
         data: {
-          id: $('#nkk').val()
+          id: $("#nkk").select2().find(":selected").data("id")
         },
         dataType: "json",
         beforeSend: () => {
@@ -75,13 +75,13 @@
           for (let i = 0; i < data.length; i++) {
             // const element = array[index];
             isikk += `
-      <tr>
-        <th scope="row">` + (i + 1) + `</th>
-        <td>` + data[i].nama + `</td>
-        <td>` + data[i].nama_shdk + `</td>
-        <td>` + data[i].nama_status + `</td>
-      </tr>
-        `;
+                      <tr>
+                        <th scope="row">` + (i + 1) + `</th>
+                        <td>` + data[i].nama + `</td>
+                        <td>` + data[i].nama_shdk + `</td>
+                        <td>` + data[i].nama_status + `</td>
+                      </tr>
+                        `;
 
           }
         }

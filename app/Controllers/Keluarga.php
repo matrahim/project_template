@@ -90,7 +90,6 @@ class Keluarga extends BaseController
             return redirect()->to('/kk/add')->withInput();
         };
 
-        dd($this->request->getRawInput());
         $this->kk->save([
             'no_kk' => $this->request->getVar('no_kk'),
             'rt' => $this->request->getVar('rt'),
@@ -100,10 +99,11 @@ class Keluarga extends BaseController
         // dd($res);
 
         if (($this->request->getVar('kk')) != "") {
+            $id_penduduk = json_decode($this->request->getVar('kk'))[1];
             $id_kk = $this->kk->getInsertID();
             $this->penduduk->save(
                 [
-                    'id_penduduk' => $this->request->getVar('kk'),
+                    'id_penduduk' => $id_penduduk,
                     'id_kk' => $id_kk
                 ]
             );
@@ -242,6 +242,8 @@ class Keluarga extends BaseController
             ->join('status', 'status.id_status = penduduk.id_status', 'LEFT')
             ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
             ->where("penduduk.id_kk='" . $id . "'")
+            ->orderBy('penduduk.id_shdk', 'ASC')
+
             ->get()->getResultArray();
         // return ;
         echo json_encode($dataKK);
