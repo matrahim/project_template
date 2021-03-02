@@ -42,7 +42,10 @@ class Kk extends BaseController
         // $data['shdk'] = $this->shdk->find();
         // $data['status'] = $this->status->find();
         $data['dusun'] = $this->dusun->find();
-        $data['penduduk'] = $this->penduduk->find();
+        $data['penduduk'] =  $this->db->table('penduduk')
+            ->select('penduduk.id_penduduk,penduduk.nama,penduduk.id_kk,penduduk.id_shdk,penduduk.nik')
+            ->where("penduduk.id_shdk=1")
+            ->get()->getResultObject();
         $data['kk'] = $this->db->table('kk')
             ->select('kk.*,penduduk.id_penduduk,penduduk.nama,penduduk.nik')
             ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
@@ -56,16 +59,19 @@ class Kk extends BaseController
     {
         $data['id'] = $id;
         $data['validation'] = $this->validation;
-        $data['agama'] = $this->agama->find();
-        $data['shdk'] = $this->shdk->find();
-        $data['status'] = $this->status->find();
-        $data['penduduk'] = $this->penduduk->find($id);
-        $data['kk'] = $this->db->table('kk')
-            ->select('kk.*,penduduk.id_penduduk,penduduk.nama,penduduk.id_shdk')
-            ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
-            ->where("penduduk.id_shdk='1'")
+        $data['dusun'] = $this->dusun->find();
+
+        $data['penduduk'] = $this->db->table('penduduk')
+            ->select('penduduk.id_penduduk,penduduk.nama,penduduk.id_kk,penduduk.id_shdk,penduduk.nik')
+            ->where("penduduk.id_shdk=1")
             ->get()->getResultObject();
-        return view('penduduk/edit.php', $data);
+        $data['kk'] = $this->db->table('kk')
+            ->select('kk.id_kk,kk.no_kk,penduduk.id_penduduk,kk.rt,kk.rw,kk.id_dusun')
+            ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
+            ->where("kk.id_kk=" . $id)
+            // ->andWhere("penduduk.id_shdk=1")
+            ->get()->getRow();
+        return view('kk/edit.php', $data);
     }
 
 
@@ -117,81 +123,52 @@ class Kk extends BaseController
 
     public function update()
     {
+        // dd();
+        if ($this->request->getVar('old_no_kk') == $this->request->getVar('no_kk')) {
+            $rules = 'required|is_numeric|min_length[10]';
+        } else {
+            $rules = 'required|is_numeric|min_length[10]|is_unique[kk.no_kk]';
+        }
         if (!$this->validate([
-            'nik' => [
-                'rules' => 'required|is_numeric|min_length[10]',
+            'no_kk' => [
+                'rules' => $rules,
                 'errors' => [
-                    'required' => ('NIK HARUS DIISI '),
-
-                    'is_numeric' => ('NIK HARUS BERISI ANGKA'),
-                    'min_length' => ('NIK MINIMAL 10 ANGKA'),
-                ]
-            ],
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => ('NAMA HARUS DI ISI ')
-                ]
-            ],
-
-            'jk' => [
-
-                'rules' => 'required',
-                'errors' => [
-                    'required' => ('PILIH JENIS KELAMIN'),
-
-                ]
-            ],
-
-            'pekerjaan' => [
-
-                'rules' => 'required',
-                'errors' => [
-                    'required' => ('PEKERJAAN HARUS DIISI '),
-
-                ]
-            ],
-            'shdk' => [
-                // required|matches[password]
-                'rules' => 'required',
-                'errors' => [
-                    'required' => ('PILIH SHDK'),
-
-                ]
-            ],
-            'status' => [
-
-                'rules' => 'required',
-                'errors' => [
-                    'required' => ('PILIH STATUS '),
-
+                    'required' => ('No KK HARUS DIISI '),
+                    'is_unique' => ('No KK SUDAH DIGUNAKAN'),
+                    'is_numeric' => ('No KK HARUS BERISI ANGKA'),
+                    'min_length' => ('No KK MINIMAL 10 ANGKA'),
                 ]
             ],
 
         ])) {
 
-            return redirect()->to('/penduduk/edit/' . $this->request->getVar('id_penduduk'))->withInput();
+            return redirect()->to('/kk/edit/' . $this->request->getVar('id_kk'))->withInput();
         };
 
         // dd($this->request->getVar('tgl_lahir'));
 
-        $this->penduduk->save([
-            'id_penduduk' => $this->request->getVar('id_penduduk'),
-            'id_kk' => empty($this->request->getVar('kk')) ? Null : $this->request->getVar('kk'),
-            'nik' => $this->request->getVar('nik'),
-            'nama' => $this->request->getVar('nama'),
-            'tempat_lahir' => $this->request->getVar('tempat_lahir'),
-            'tgl_lahir' => $this->request->getVar('tgl_lahir'),
-            'jk' => $this->request->getVar('jk'),
-            'id_agama' => $this->request->getVar('agama'),
-            'pekerjaan' => $this->request->getVar('pekerjaan'),
-            'id_shdk' => $this->request->getVar('shdk'),
-            'id_status' => $this->request->getVar('status'),
+        $this->kk->save([
+            'id_kk' => $this->request->getVar('id_kk'),
+            'no_kk' => $this->request->getVar('no_kk'),
+            'rt' => $this->request->getVar('rt'),
+            'rw' => $this->request->getVar('rw'),
+            'id_dusun' => $this->request->getVar('id_dusun') == "" ? NULL : $this->request->getVar('id_dusun')
         ]);
+
+        if (($this->request->getVar('kk')) != "") {
+            $id_penduduk = explode(',', $this->request->getVar('kk'))[1];
+            $id_kk = $this->request->getVar('id_kk');
+            $this->penduduk->save(
+                [
+                    'id_penduduk' => $id_penduduk,
+                    'id_kk' => $id_kk
+                ]
+            );
+        }
 
         session()->setFlashdata('pesan', 'Data Berhasil di Ubah');
 
-        return redirect()->to('/penduduk');
+        return redirect()->to('/kk');
     }
 
     public function delete($id)
@@ -223,7 +200,7 @@ class Kk extends BaseController
                           <input type='hidden' name='_method' value='delete' />
                           <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button></form>
         <a class='btn btn-icon waves-effect waves-light btn-info'> <i class='fas fa-list'></i> </a>
-        <a href='" . base_url('penduduk/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
+        <a href='" . base_url('kk/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
             })
             // ->rawColumns(['action'])
             // ->where(['id_shdk' => 1])

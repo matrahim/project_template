@@ -50,10 +50,10 @@ $routes->delete('/penduduk/(:num)', 'Penduduk::delete/$1', ['filter' => 'role:ad
 $routes->post('/penduduk/ambil_data_kk', 'Penduduk::getKK', ['filter' => 'role:user', 'filter' => 'role:admin']);
 
 
-$routes->get('/keluarga', 'Kk::index', ['filter' => 'role:user', 'filter' => 'role:admin']);
-$routes->get('/keluarga/add', 'Kk::create', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->get('/kk', 'Kk::index', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->get('/kk/add', 'Kk::create', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->get('/kk/save', 'Kk::save', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->delete('/kk/(:num)', 'Kk::delete/$1', ['filter' => 'role:admin']);
-// $routes->get('/keluarga/save', 'Kk::save', ['filter' => 'role:user', 'filter' => 'role:admin']);
 
 /**
  * --------------------------------------------------------------------

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card-box">
-                <h4 class="header-title mt-0 mb-3">Form Tambah Data Penduduk</h4>
+                <h4 class="header-title mt-0 mb-3">Form Edit Data Penduduk</h4>
 
                 <form action="/penduduk/update" method="POST">
                     <?= csrf_field() ?>

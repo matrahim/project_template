@@ -7,15 +7,17 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card-box">
-                <h4 class="header-title mt-0 mb-3">Form Tambah Data Keluarga</h4>
+                <h4 class="header-title mt-0 mb-3">Form Edit Data Keluarga</h4>
 
-                <form action="/kk/save" method="POST">
+                <form action="/kk/update" method="POST">
                     <?= csrf_field() ?>
+                    <input type="hidden" name="id_kk" value="<?= $id ?>">
+                    <input type="hidden" name="old_no_kk" value="<?= $kk->no_kk ?>">
                     <div class="row">
 
                         <div class=" form-group col-xl-4">
                             <label for="no_kk">No Kartu Keluarga</label>
-                            <input type="text" name="no_kk" placeholder="No Kartu keluarga" class="form-control <?= ($validation->hasError('no_kk')) ? 'is-invalid' : ""; ?>" value="<?= old('no_kk'); ?>">
+                            <input type="text" name="no_kk" placeholder="No Kartu keluarga" class="form-control <?= ($validation->hasError('no_kk')) ? 'is-invalid' : ""; ?>" value="<?= old('no_kk') == "" ? $kk->no_kk : old('no_kk'); ?>">
                             <div class="invalid-feedback">
                                 <?= $validation->getError('no_kk'); ?>
                             </div>
@@ -23,7 +25,7 @@
                         </div>
                         <div class=" form-group col-xl-4">
                             <label for="rt">RT</label>
-                            <input type="text" name="rt" placeholder="No RT" class="form-control <?= ($validation->hasError('rt')) ? 'is-invalid' : ""; ?>" value="<?= old('rt'); ?>">
+                            <input type="text" name="rt" placeholder="No RT" class="form-control <?= ($validation->hasError('rt')) ? 'is-invalid' : ""; ?>" value="<?= old('rt') == "" ? $kk->rt : old('rt'); ?>">
                             <div class="invalid-feedback">
                                 <?= $validation->getError('rt'); ?>
                             </div>
@@ -32,7 +34,7 @@
 
                         <div class=" form-group col-xl-4">
                             <label for="rw">RW</label>
-                            <input type="text" name="rw" placeholder="No RW" class="form-control <?= ($validation->hasError('rw')) ? 'is-invalid' : ""; ?>" value="<?= old('rw'); ?>">
+                            <input type="text" name="rw" placeholder="No RW" class="form-control <?= ($validation->hasError('rw')) ? 'is-invalid' : ""; ?>" value="<?= old('rw') == "" ? $kk->rw : old('rw'); ?>">
                             <div class="invalid-feedback">
                                 <?= $validation->getError('rw'); ?>
                             </div>
@@ -47,7 +49,19 @@
                             <select name="id_dusun" class="custom-select <?= ($validation->hasError('id_dusun')) ? 'is-invalid' : ""; ?>">
                                 <option value="" <?= old('id_dusun') == "" ? "selected" : ""; ?>>Pilih Dusun</option>
                                 <?php foreach ($dusun as $row) : ?>
-                                    <option <?= old('id_dusun') == $row['id_dusun'] ? "selected" : ""; ?> value="<?= $row['id_dusun'] ?>"><?= $row['nama_dusun'] ?></option>
+                                    <option <?php
+                                            if (old('id_dusun') == "") {
+                                                if ($row['id_dusun'] == $kk->id_dusun) {
+
+                                                    echo  "selected";
+                                                }
+                                            } else {
+                                                if ($row['id_dusun'] == old('id_dusun')) {
+
+                                                    echo  "selected";
+                                                }
+                                            }
+                                            ?> value="<?= $row['id_dusun'] ?>"><?= $row['nama_dusun'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">
@@ -61,10 +75,17 @@
                                 <option value="" <?= old('kk') == "" ? "selected" : ""; ?>>Pilih Kepala keluarga - Nik </option>
                                 <?php foreach ($penduduk as $row) : ?>
                                     <option <?php
-                                            if (old('kk') != "") {
-                                                old('kk') == $row->id_kk ? "selected" : "";
+                                            if (old('kk') == "") {
+                                                if ($kk->id_kk == $row->id_kk) {
+                                                    echo "selected";
+                                                }
+                                            } else {
+                                                if (old('kk') == $row->id_kk) {
+                                                    echo  "selected";
+                                                }
                                             }
-                                            ?> data-id="<?= $row->id_kk ?>" value="[<?= $row->id_kk ?>,<?= $row->id_penduduk ?>]"><?= $row->nama . ' - ' . $row->nik ?></option>
+
+                                            ?> data-id="<?= $row->id_kk ?>" value="<?= $row->id_kk . ',' . $row->id_penduduk ?>"><?= $row->nama . ' - ' . $row->nik ?></option>
                                 <?php endforeach; ?>
                             </select>
 

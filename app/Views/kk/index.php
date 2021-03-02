@@ -15,7 +15,7 @@
                         <?= session()->getFlashdata('pesan'); ?>
                     </div>
                 <?php endif ?>
-                <a href="<?= base_url("keluarga/add"); ?>">
+                <a href="<?= base_url("kk/add"); ?>">
                     <button class="btn btn-info waves-effect waves-light mb-3"> <i class="fa fa-user-plus mr-1"></i> <span>Tambah data Keluarga</span> </button>
                 </a>
 
