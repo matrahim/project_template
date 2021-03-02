@@ -9,7 +9,7 @@
             <div class="card-box">
                 <h4 class="header-title mt-0 mb-3">Form Tambah Data Keluarga</h4>
 
-                <form action="/keluarga/save" method="POST">
+                <form action="/kk/save" method="POST">
                     <?= csrf_field() ?>
                     <div class="row">
 

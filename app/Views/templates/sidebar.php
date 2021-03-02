@@ -71,7 +71,7 @@
           </a>
         </li>
         <li>
-          <a href="<?= base_url('kk'); ?>">
+          <a href="<?= base_url('keluarga'); ?>">
             <i class="mdi mdi-account-multiple"></i>
             <span> Kartu Keluarga</span>
           </a>

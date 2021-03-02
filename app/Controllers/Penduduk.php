@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Irsyadulibad\DataTables\DataTables;
 // use app\CodeIgniter\Model;
 use App\Models\PendudukModel;
-use App\Models\KeluargaModel;
+use App\Models\KkModel;
 use App\Models\AgamaModel;
 use App\Models\ShdkModel;
 use App\Models\StatusModel;
@@ -23,7 +23,7 @@ class Penduduk extends BaseController
   {
     $this->db      = \Config\Database::connect();
     $this->penduduk = new PendudukModel();
-    $this->kk = new KeluargaModel();
+    $this->kk = new KkModel();
     $this->agama = new AgamaModel();
     $this->shdk = new ShdkModel();
     $this->status = new StatusModel();
@@ -43,7 +43,7 @@ class Penduduk extends BaseController
     $data['status'] = $this->status->find();
     $data['penduduk'] = $this->penduduk->find();
     $data['kk'] = $this->db->table('kk')
-      ->select('kk.*,penduduk.id_penduduk,penduduk.nama,penduduk.id_shdk')
+      ->select('kk.*,penduduk.id_penduduk,penduduk.nama')
       ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
       // ->where("penduduk.id_shdk='1'")
       ->get()->getResultObject();
@@ -60,9 +60,9 @@ class Penduduk extends BaseController
     $data['status'] = $this->status->find();
     $data['penduduk'] = $this->penduduk->find($id);
     $data['kk'] = $this->db->table('kk')
-      ->select('kk.*,penduduk.id_penduduk,penduduk.nama,penduduk.id_shdk')
+      ->select('kk.*,penduduk.id_penduduk,penduduk.nama')
       ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
-      ->where("penduduk.id_shdk='1'")
+      // ->where("penduduk.id_shdk='1'")
       ->get()->getResultObject();
     return view('penduduk/edit.php', $data);
   }

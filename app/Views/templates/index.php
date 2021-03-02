@@ -290,7 +290,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-          url: '<?= base_url('Keluarga') ?>/json'
+          url: '<?= base_url('Kk') ?>/json'
         },
 
         columns: [{

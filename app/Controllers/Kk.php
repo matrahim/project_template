@@ -5,12 +5,12 @@ namespace App\Controllers;
 use Irsyadulibad\DataTables\DataTables;
 // use app\CodeIgniter\Model;
 use App\Models\PendudukModel;
-use App\Models\KeluargaModel;
+use App\Models\KkModel;
 use App\Models\DusunModel;
 use App\Models\ShdkModel;
 use App\Models\StatusModel;
 
-class Keluarga extends BaseController
+class Kk extends BaseController
 {
     protected $penduduk;
     protected $kk;
@@ -23,7 +23,7 @@ class Keluarga extends BaseController
     {
         $this->db      = \Config\Database::connect();
         $this->penduduk = new PendudukModel();
-        $this->kk = new KeluargaModel();
+        $this->kk = new KkModel();
         $this->dusun = new DusunModel();
         // $this->shdk = new ShdkModel();
         // $this->status = new StatusModel();
@@ -46,7 +46,7 @@ class Keluarga extends BaseController
         $data['kk'] = $this->db->table('kk')
             ->select('kk.*,penduduk.id_penduduk,penduduk.nama,penduduk.nik')
             ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
-            ->where("penduduk.id_shdk='1'")
+            // ->where("penduduk.id_shdk='1'")
             ->get()->getResultObject();
 
         return view('kk/add.php', $data);
@@ -202,27 +202,28 @@ class Keluarga extends BaseController
         // if ($data->user_image != 'default.jpg') {
         //   unlink('img/profil/' . $data->user_image);
         // }
-        $this->penduduk->delete($id);
+        // dd($id);
+        $this->kk->delete($id);
         session()->setFlashdata('pesan', 'Data Berhasil di Hapus');
-
-        return redirect()->to('/penduduk');
+        // dd($res);
+        return redirect()->to('/keluarga');
     }
 
     public function json()
     {
         return DataTables::use('kk')
-            ->select('kk.*,penduduk.id_kk,penduduk.nama,penduduk.id_shdk,dusun.id_dusun,dusun.nama_dusun')
+            ->select('kk.id_kk as id,kk.no_kk,kk.id_dusun,kk.rw,kk.rt,penduduk.id_kk,penduduk.nama,penduduk.id_shdk,dusun.id_dusun,dusun.nama_dusun')
             ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
             ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
             // ->order('title', 'DESC')
             ->addColumn('action', function ($data) {
                 return "
-        <form action='/penduduk/" . $data->id_kk . "' method='post' class='d-inline'>
+        <form action='/kk/" . $data->id . "' method='post' class='d-inline'>
                            " . csrf_field() . "
                           <input type='hidden' name='_method' value='delete' />
                           <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button></form>
         <a class='btn btn-icon waves-effect waves-light btn-info'> <i class='fas fa-list'></i> </a>
-        <a href='" . base_url('penduduk/edit/' . $data->id_kk) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
+        <a href='" . base_url('penduduk/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
             })
             // ->rawColumns(['action'])
             // ->where(['id_shdk' => 1])
