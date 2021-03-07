@@ -34,6 +34,9 @@
   <!-- dropify -->
   <link href="<?= base_url(); ?>/assets/libs/dropify/dropify.min.css" rel="stylesheet" type="text/css" />
 
+  <!-- Custom box css -->
+  <link href="<?= base_url(); ?>/assets/libs/custombox/custombox.min.css" rel="stylesheet">
+
   <!-- App css -->
   <link href="<?= base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?= base_url(); ?>/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -162,6 +165,8 @@
   </div>
   <!-- END wrapper -->
 
+  <?= $this->include('templates/modal'); ?>
+
 
   <!-- Vendor js -->
   <script src="<?= base_url(); ?>/assets/js/vendor.min.js"></script>
@@ -208,6 +213,9 @@
   <!-- form-upload init -->
   <script src="<?= base_url(); ?>/assets/js/pages/form-fileupload.init.js"></script>
 
+  <!-- Modal-Effect -->
+  <script src="<?= base_url(); ?>/assets/libs/custombox/custombox.min.js"></script>
+
   <!-- validation init -->
   <script src="<?= base_url(); ?>/assets/js/pages/form-validation.init.js"></script>
   <!-- App js -->
@@ -217,6 +225,81 @@
 
   <script>
     $(document).ready(function() {
+
+      detailData = (id_pend = 0, id_kk = 0) => {
+        // console.log(id_pend, id_kk)
+        $.ajax({
+          url: "<?= base_url('penduduk') ?>/detail",
+          method: "POST",
+          dataType: 'JSON',
+          data: {
+            "id_pend": id_pend,
+            "id_kk": id_kk
+          }
+          // context: document.body
+        }).done(function(res) {
+          console.log(res['keluarga'])
+          $('#modal_detail').html(
+            `
+            <tr>
+                <th width="25%">NIK</th>
+                <td width="25%">` + res['penduduk'].nik + `</td>
+                <th width="25%">No KK</th>
+                <td width="25%">` + res['penduduk'].no_kk + `</td>
+            </tr>
+            <tr>
+                <th>Nama</th>
+                <td>` + res['penduduk'].nama + `</td>
+                <th>Tempat, Tanggal Lahir</th>
+                <td>` + res['penduduk'].tempat_lahir + `, ` + res['penduduk'].tgl_lahir + `</td>
+            </tr>
+            <tr>
+                <th>Agama</th>
+                <td>` + res['penduduk'].nama_agama + `</</td>
+                <th>Jenis Kelamin</th>
+                <td>` + (res['penduduk'].jk == "L" ? "Laki-laki" : "Perempuan") + `</</td>
+            </tr>
+            <tr>
+                <th>Pekerjaan</th>
+                <td>` + (res['penduduk'].pekerjaan == null ? " " : res['penduduk'].pekerjaan) + `</</td>
+                <th>Alamat</th>
+                <td>Dusun :` + (res['penduduk'].nama_dusun == null ? " " : res['penduduk'].nama_dusun) + "  RT " + (res['penduduk'].rt == null ? " " : res['penduduk'].rt) + " RW " + (res['penduduk'].rw == null ? " " : res['penduduk'].rw) + `</</td>
+            </tr>
+            <tr>
+                <th>SHDK</th>
+                <td>` + res['penduduk'].nama_shdk + `</</td>
+                <th>Status</th>
+                <td>` + res['penduduk'].nama_status + `</</td>
+            </tr>
+            `
+          )
+          let element = `<tr>
+                            <th width="25%">NAMA</th>
+                            <th width="25%">NIK</th>
+                            <th width="25%">SHDK</th>
+                            <th width="25%">STATUS</th>
+                        </tr>`;
+          if (res['keluarga'].length == 0) {
+            element += `<tr><td colspan="4" class="text-center">Tidak Ada Data</td></tr>`
+            $('#kop_kk').html("")
+            $('#kop_alamat').html("")
+          } else {
+            $('#kop_kk').html("No KK : " + res['penduduk'].no_kk)
+            $('#kop_alamat').html("Dusun : " + (res['penduduk'].nama_dusun == null ? " " : res['penduduk'].nama_dusun) + "  RT " + (res['penduduk'].rt == null ? " " : res['penduduk'].rt) + " RW " + (res['penduduk'].rw == null ? " " : res['penduduk'].rw))
+            res['keluarga'].forEach(row => {
+              element += `<tr>
+                              <td>` + row.nama + `</td>
+                              <td>` + row.nik + `</td>
+                              <td>` + row.nama_shdk + `</td>
+                              <td>` + row.nama_status + `</td>
+                            </tr>`;
+            });
+          }
+
+
+          $('#modal_keluarga').html(element)
+        });
+      }
 
       $(window).on("load", angotakk());
       $('#nkk').select2();

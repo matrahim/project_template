@@ -272,7 +272,7 @@ class Penduduk extends BaseController
   public function json()
   {
     return DataTables::use('penduduk')
-      ->select('penduduk.id_penduduk as id,penduduk.id_kk,penduduk.nik,penduduk.nama,penduduk.tempat_lahir,penduduk.tgl_lahir,penduduk.jk,penduduk.id_agama,penduduk.id_shdk,penduduk.id_status,agama.nama_agama,kk.no_kk,shdk.nama_shdk')
+      ->select('penduduk.id_penduduk as id,penduduk.id_kk as kk_id,penduduk.nik,penduduk.nama,penduduk.tempat_lahir,penduduk.tgl_lahir,penduduk.jk,penduduk.id_agama,penduduk.id_shdk,penduduk.id_status,agama.nama_agama,kk.no_kk,shdk.nama_shdk')
       ->join('kk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
       ->join('agama', 'penduduk.id_agama = agama.id_agama', 'LEFT')
       ->join('shdk', 'penduduk.id_shdk = shdk.id_shdk', 'LEFT')
@@ -283,7 +283,7 @@ class Penduduk extends BaseController
                            " . csrf_field() . "
                           <input type='hidden' name='_method' value='delete' />
                           <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button></form>
-        <a class='btn btn-icon waves-effect waves-light btn-info'> <i class='fas fa-list'></i> </a>
+        <button onClick='detailData(" . $data->id . "," . $data->kk_id . ")' type='button' class='btn btn-primary waves-effect waves-light' data-toggle='modal' data-target='#exampleModalScrollable'><i class='fas fa-list'></i></button>
         <a href='" . base_url('penduduk/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
       })
       ->addColumn('ttl', function ($data) {
@@ -300,8 +300,15 @@ class Penduduk extends BaseController
   public function getKK()
   {
     $id = $this->request->getVar('id');
-    $dataKK = $this->db->table('penduduk')
-      ->select('penduduk.nama,penduduk.id_shdk,shdk.nama_shdk,penduduk.id_status,status.nama_status,kk.id_dusun,kk.rt,kk.rw,dusun.nama_dusun')
+    $dataKK = $this->daftarKK($id);
+    // return ;
+    echo json_encode($dataKK);
+  }
+
+  public function daftarKK($id)
+  {
+    $res = $this->db->table('penduduk')
+      ->select('penduduk.nama,penduduk.nik,penduduk.id_shdk,shdk.nama_shdk,penduduk.id_status,status.nama_status,kk.id_dusun,kk.rt,kk.rw,dusun.nama_dusun')
       ->join('kk', 'kk.id_kk = penduduk.id_kk', 'LEFT')
       ->join('shdk', 'shdk.id_shdk = penduduk.id_shdk', 'LEFT')
       ->join('status', 'status.id_status = penduduk.id_status', 'LEFT')
@@ -309,8 +316,31 @@ class Penduduk extends BaseController
       ->where("penduduk.id_kk='" . $id . "'")
       ->orderBy('penduduk.id_shdk', 'ASC')
       ->get()->getResultArray();
-    // return ;
-    echo json_encode($dataKK);
+
+    return $res;
+  }
+
+  public function detail()
+  {
+    $pend = $this->request->getVar('id_pend');
+    $kk = $this->request->getVar('id_kk');
+
+    $dataKK = $this->daftarKK($kk);
+
+    $dataPend = $this->db->table('penduduk')
+      ->select('penduduk.nama,penduduk.nik,penduduk.tempat_lahir,penduduk.tgl_lahir,penduduk.jk,penduduk.pekerjaan,shdk.nama_shdk,status.nama_status,kk.no_kk,kk.rt,kk.rw,dusun.nama_dusun,agama.nama_agama,')
+      ->join('kk', 'kk.id_kk = penduduk.id_kk', 'LEFT')
+      ->join('agama', 'penduduk.id_agama = agama.id_agama', 'LEFT')
+      ->join('shdk', 'shdk.id_shdk = penduduk.id_shdk', 'LEFT')
+      ->join('status', 'status.id_status = penduduk.id_status', 'LEFT')
+      ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
+      ->where("penduduk.id_penduduk='" . $pend . "'")
+      // ->orderBy('penduduk.id_shdk', 'ASC')
+      ->get()->getResultArray();
+
+    $data['penduduk'] = $dataPend[0];
+    $data['keluarga'] = $dataKK;
+    echo json_encode($data);
   }
   //--------------------------------------------------------------------
 
