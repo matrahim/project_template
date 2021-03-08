@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body">
-                <h4 class="text-center">DATA DIRI</h4>
+                <h4 id="judul_modal" class="text-center">DATA DIRI</h4>
                 <table class="table">
                     <tbody id="modal_detail">
 
@@ -34,7 +34,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
         </div>
     </div>

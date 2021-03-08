@@ -189,18 +189,22 @@ class Kk extends BaseController
     public function json()
     {
         return DataTables::use('kk')
-            ->select('kk.id_kk as id,kk.no_kk,kk.id_dusun,kk.rw,kk.rt,penduduk.id_kk,penduduk.nama,penduduk.id_shdk,dusun.id_dusun,dusun.nama_dusun')
-            ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
+            ->select('kk.*,
+            penduduk.nama,
+            penduduk.id_shdk,
+            dusun.nama_dusun')
             ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
+            ->join('penduduk', 'penduduk.id_kk = kk.id_kk', 'LEFT')
+            ->where(['penduduk.id_shdk' => "1"])
             // ->order('title', 'DESC')
             ->addColumn('action', function ($data) {
                 return "
-        <form action='/kk/" . $data->id . "' method='post' class='d-inline'>
+        <form action='/kk/" . $data->id_kk . "' method='post' class='d-inline'>
                            " . csrf_field() . "
                           <input type='hidden' name='_method' value='delete' />
                           <button onClick='return confirm(" . '"Anda Yakin ?"' . ")' class='btn btn-icon waves-effect waves-light btn-danger' type='submit'><i class='fas fa-trash'></i> </button></form>
-        <a class='btn btn-icon waves-effect waves-light btn-info'> <i class='fas fa-list'></i> </a>
-        <a href='" . base_url('kk/edit/' . $data->id) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
+                          <button onClick='detailDataKK(" . $data->id_kk . ")' type='button' class='btn btn-primary waves-effect waves-light' data-toggle='modal' data-target='#exampleModalScrollable'><i class='fas fa-list'></i></button>
+        <a href='" . base_url('kk/edit/' . $data->id_kk) . "' class='btn btn-icon waves-effect waves-light btn-warning'> <i class='fas fa-pen'></i> </a>";
             })
             // ->rawColumns(['action'])
             // ->where(['id_shdk' => 1])
@@ -213,8 +217,15 @@ class Kk extends BaseController
     public function getKK()
     {
         $id = $this->request->getVar('id');
-        $dataKK = $this->db->table('penduduk')
-            ->select('penduduk.nama,penduduk.id_shdk,shdk.nama_shdk,penduduk.id_status,status.nama_status,kk.id_dusun,kk.rt,kk.rw,dusun.nama_dusun')
+        $dataKK = $this->daftarKK($id);
+        // return ;
+        echo json_encode($dataKK);
+    }
+
+    public function daftarKK($id)
+    {
+        $res = $this->db->table('penduduk')
+            ->select('penduduk.nama,penduduk.id_shdk,penduduk.nik,shdk.nama_shdk,penduduk.id_status,status.nama_status,kk.id_dusun,kk.rt,kk.rw,dusun.nama_dusun')
             ->join('kk', 'kk.id_kk = penduduk.id_kk', 'LEFT')
             ->join('shdk', 'shdk.id_shdk = penduduk.id_shdk', 'LEFT')
             ->join('status', 'status.id_status = penduduk.id_status', 'LEFT')
@@ -223,8 +234,27 @@ class Kk extends BaseController
             ->orderBy('penduduk.id_shdk', 'ASC')
 
             ->get()->getResultArray();
-        // return ;
-        echo json_encode($dataKK);
+
+        return $res;
+    }
+
+    public function detail()
+    {
+        // $pend = $this->request->getVar('id_pend');
+        $kk = $this->request->getVar('id_kk');
+
+        $dataKK = $this->daftarKK($kk);
+
+        $dataKk = $this->db->table('kk')
+            ->select('kk.*,dusun.nama_dusun')
+            ->join('dusun', 'dusun.id_dusun = kk.id_dusun', 'LEFT')
+            ->where("kk.id_kk='" . $kk . "'")
+            // ->orderBy('penduduk.id_shdk', 'ASC')
+            ->get()->getResultArray();
+
+        $data['kk'] = $dataKk[0];
+        $data['keluarga'] = $dataKK;
+        echo json_encode($data);
     }
     //--------------------------------------------------------------------
 

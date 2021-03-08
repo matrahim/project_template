@@ -300,6 +300,63 @@
           $('#modal_keluarga').html(element)
         });
       }
+      detailDataKK = (id_kk = 0) => {
+        // console.log(id_pend, id_kk)
+        $.ajax({
+          url: "<?= base_url('Kk') ?>/detail",
+          method: "POST",
+          dataType: 'JSON',
+          data: {
+            // "id_pend": id_pend,
+            "id_kk": id_kk
+          }
+          // context: document.body
+        }).done(function(res) {
+          // console.log(res)
+          $('#judul_modal').html('DATA KARTU KELUARGA')
+          $('#modal_detail').html(
+            `
+            <tr>
+                <th width="25%">No KK</th>
+                <td width="25%">` + res['kk'].no_kk + `</td>
+                <th width="25%">Dusun</th>
+                <td width="25%">` + res['kk'].nama_dusun + `</td>
+            </tr>
+            <tr>
+                <th>RT</th>
+                <td>` + res['kk'].rt + `</td>
+                <th>RW</th>
+                <td>` + res['kk'].rw + `</td>
+            </tr>
+            `
+          )
+          let element = `<tr>
+                            <th width="25%">NAMA</th>
+                            <th width="25%">NIK</th>
+                            <th width="25%">SHDK</th>
+                            <th width="25%">STATUS</th>
+                        </tr>`;
+          if (res['keluarga'].length == 0) {
+            element += `<tr><td colspan="4" class="text-center">Tidak Ada Data</td></tr>`
+            $('#kop_kk').html("")
+            $('#kop_alamat').html("")
+          } else {
+            $('#kop_kk').html("No KK : " + res['kk'].no_kk)
+            $('#kop_alamat').html("Dusun : " + (res['kk'].nama_dusun == null ? " " : res['kk'].nama_dusun) + "  RT " + (res['kk'].rt == null ? " " : res['kk'].rt) + " RW " + (res['kk'].rw == null ? " " : res['kk'].rw))
+            res['keluarga'].forEach(row => {
+              element += `<tr>
+                              <td>` + row.nama + `</td>
+                              <td>` + row.nik + `</td>
+                              <td>` + row.nama_shdk + `</td>
+                              <td>` + row.nama_status + `</td>
+                            </tr>`;
+            });
+          }
+
+
+          $('#modal_keluarga').html(element)
+        });
+      }
 
       $(window).on("load", angotakk());
       $('#nkk').select2();
