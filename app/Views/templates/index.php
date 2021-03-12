@@ -360,6 +360,7 @@
 
       $(window).on("load", angotakk());
       $('#nkk').select2();
+      $('#penduduk_sk').select2();
 
       $('#datatable_user').DataTable({
         processing: true,
@@ -444,6 +445,35 @@
           {
             data: 'nama_dusun',
             name: 'nama_dusun'
+          },
+          {
+            data: 'action',
+            name: 'action'
+          },
+        ]
+      });
+      $('#datatable_sk').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+          url: '<?= base_url('surat_keluar') ?>/json'
+        },
+
+        columns: [{
+            data: 'no_surat',
+            name: 'no_surat'
+          },
+          {
+            data: 'nama_jenissurat',
+            name: 'nama_jenissurat'
+          },
+          {
+            data: 'nama',
+            name: 'nama'
+          },
+          {
+            data: 'nik',
+            name: 'nik'
           },
           {
             data: 'action',

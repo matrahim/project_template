@@ -55,6 +55,8 @@ $routes->get('/kk/add', 'Kk::create', ['filter' => 'role:user', 'filter' => 'rol
 $routes->get('/kk/save', 'Kk::save', ['filter' => 'role:user', 'filter' => 'role:admin']);
 $routes->delete('/kk/(:num)', 'Kk::delete/$1', ['filter' => 'role:admin']);
 
+$routes->get('/surat_keluar/add', 'Surat_keluar::create', ['filter' => 'role:user', 'filter' => 'role:admin']);
+$routes->delete('/surat_keluar/(:num)', 'Surat_keluar::delete/$1', ['filter' => 'role:admin']);
 /**
  * --------------------------------------------------------------------
  * Additional Routing

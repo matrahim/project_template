@@ -76,6 +76,12 @@
             <span> Kartu Keluarga</span>
           </a>
         </li>
+        <li>
+          <a href="<?= base_url('surat_keluar'); ?>">
+            <i class="mdi mdi-email"></i>
+            <span> Surat Keluar</span>
+          </a>
+        </li>
 
         <?php if (in_groups('admin')) : ?>
           <li>
