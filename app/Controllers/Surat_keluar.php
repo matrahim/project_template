@@ -203,7 +203,7 @@ class Surat_keluar extends BaseController
             ->join('jenis_surat', 'surat_keluar.id_jenissurat = jenis_surat.id_jenissurat', 'LEFT')
             ->join('penduduk', 'surat_keluar.id_penduduk = penduduk.id_penduduk', 'LEFT')
             ->where("surat_keluar.id_sk=" . $id)
-            ->get()->getResultObject();
+            ->get()->getResultObject()[0];
 
         $penduduk = $this->db->table('penduduk')
             ->select('penduduk.*,agama.*,status.*,shdk.*,status.*,kk.*')
@@ -212,9 +212,9 @@ class Surat_keluar extends BaseController
             ->join('status', 'penduduk.id_status = status.id_status', 'LEFT')
             ->join('shdk', 'penduduk.id_shdk = shdk.id_shdk', 'LEFT')
             // ->join('shdk', 'penduduk.id_shdk = shdk.id_shdk', 'LEFT')
-            ->where("penduduk.id_penduduk=" . $surat_keluar[0]->id_penduduk)
+            ->where("penduduk.id_penduduk=" . $surat_keluar->id_penduduk)
             ->get()->getResultObject();
-        dd($penduduk);
+        // dd($penduduk);
         $html = '
         <!DOCTYPE html>
         <html lang="en">
@@ -223,9 +223,19 @@ class Surat_keluar extends BaseController
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
+            
         </head>
         <body>
-            <h1>coba</h1>
+        <table >
+            <tr>
+                <td align="center"  >Pemerintah Kabupaten Mamuju</td>
+            </tr>
+            <tr>
+                <td>Pemerintah Kabupaten Mamuju</td>
+            </tr>
+        </table>
+            
+            <h1>Jenis Surat : </h1>' . $surat_keluar->nama_jenissurat . '
         </body>
         </html>';
 
